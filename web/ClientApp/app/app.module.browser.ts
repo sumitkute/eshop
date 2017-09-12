@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppModuleShared } from './app.module.shared';
 import { AppComponent } from './components/app/app.component';
+//import { appSettings, ISettings } from './appSettings';
+import { environment } from './enviornment';
+import { enviornments } from './../config/enviornment.prod';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -14,8 +17,14 @@ import { AppComponent } from './components/app/app.component';
     ]
 })
 export class AppModule {
+    
 }
 
 export function getBaseUrl() {
-    return document.getElementsByTagName('base')[0].href;
+    if (environment.production) {
+        return enviornments.devapiendpointURL
+       // return env. //document.getElementsByTagName('base')[0].href;
+    } else {
+        return enviornments.prodapiendpointURL
+    }
 }
